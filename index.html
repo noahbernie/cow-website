@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐄 Cow Central - Everything Moo!</title>
+    <title>🐄 Cow Central - Everything About Cows!</title>
     <style>
         * {
             margin: 0;
@@ -12,295 +12,207 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 100%);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #87CEEB, #98FB98);
             min-height: 100vh;
-            color: #2c3e50;
+            color: #333;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #2E7D32;
+            margin-bottom: 10px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
+        .cow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .cow-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
 
-        h1 {
-            font-size: 3em;
-            color: #8B4513;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        .cow-card:hover {
+            transform: translateY(-10px);
         }
 
-        .subtitle {
-            font-size: 1.5em;
-            color: #666;
+        .cow-emoji {
+            font-size: 4em;
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .moo-button {
-            background: #FF69B4;
+        .fun-facts {
+            background: #FFF9C4;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            border-left: 5px solid #FFC107;
+        }
+
+        .cow-sounds {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        button {
+            background: #4CAF50;
             color: white;
             border: none;
             padding: 15px 30px;
             font-size: 1.2em;
-            border-radius: 50px;
+            border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 10px;
         }
 
-        .moo-button:hover {
-            background: #FF1493;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        button:hover {
+            background: #45a049;
+            transform: scale(1.05);
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h2 {
-            color: #8B4513;
-            margin-bottom: 15px;
-            font-size: 1.8em;
-        }
-
-        .cow-emoji {
+        .floating-cow {
+            position: fixed;
             font-size: 3em;
-            margin-bottom: 15px;
-            display: block;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1000;
         }
 
-        .fun-facts {
-            background: #FFE4E1;
-            border-left: 5px solid #FF69B4;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-        }
-
-        .breeds {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .breed {
-            text-align: center;
-            padding: 15px;
-            background: #F0F8FF;
-            border-radius: 15px;
-            border: 2px solid #87CEEB;
-        }
-
-        .breed-name {
-            font-weight: bold;
-            color: #8B4513;
-            margin-bottom: 8px;
-        }
-
-        footer {
-            text-align: center;
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .moo-sound {
-            font-size: 2em;
-            color: #FF69B4;
-            margin: 10px 0;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .moo-sound.show {
-            opacity: 1;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
 
-        .bouncing-cow {
-            animation: bounce 2s infinite;
-            display: inline-block;
-        }
-
-        ul {
-            text-align: left;
-            margin: 15px 0;
-        }
-
-        li {
-            margin: 8px 0;
-            padding-left: 10px;
+        footer {
+            background: rgba(46, 125, 50, 0.9);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>🐄 Cow Central 🐄</h1>
+        <p>Your udderly amazing source for everything cow!</p>
+    </header>
+
     <div class="container">
-        <header>
-            <h1><span class="bouncing-cow">🐄</span> Cow Central <span class="bouncing-cow">🐄</span></h1>
-            <p class="subtitle">Your udderly amazing source for cow knowledge!</p>
-            <button class="moo-button" onclick="playMoo()">🔊 Click for MOO!</button>
-            <div class="moo-sound" id="mooSound">MOOOOOOO! 🐄</div>
-        </header>
-
-        <div class="grid">
-            <div class="card">
-                <span class="cow-emoji">🐮</span>
-                <h2>Amazing Cow Facts</h2>
-                <ul>
-                    <li>🥛 Cows can produce 6-7 gallons of milk per day!</li>
-                    <li>👁️ Cows have 360-degree panoramic vision</li>
-                    <li>🧠 They can remember faces for years</li>
-                    <li>💤 Cows sleep 4 hours a day standing up</li>
-                    <li>🏃‍♀️ They can run up to 25 mph!</li>
-                    <li>👃 Cows can smell things up to 6 miles away</li>
-                    <li>🌡️ Their normal body temperature is 101.5°F</li>
-                </ul>
+        <div class="cow-grid">
+            <div class="cow-card">
+                <div class="cow-emoji">🐄</div>
+                <h3>Holstein Cows</h3>
+                <p>The classic black and white dairy cows! They're the most common dairy breed and can produce up to 7 gallons of milk per day. That's a lot of moo-juice!</p>
             </div>
 
-            <div class="card">
-                <span class="cow-emoji">🌾</span>
-                <h2>Cow Diet & Lifestyle</h2>
-                <p><strong>What do cows eat?</strong></p>
-                <ul>
-                    <li>🌱 Grass (their favorite!)</li>
-                    <li>🌽 Corn silage</li>
-                    <li>🌾 Hay and alfalfa</li>
-                    <li>🥕 Root vegetables</li>
-                    <li>💧 40 gallons of water per day!</li>
-                </ul>
-                <p style="margin-top: 15px;"><strong>Daily routine:</strong> Cows spend 6-8 hours grazing, 8 hours chewing cud, and love to socialize with their herd!</p>
+            <div class="cow-card">
+                <div class="cow-emoji">🐮</div>
+                <h3>Jersey Cows</h3>
+                <p>These smaller, brown beauties produce the richest, creamiest milk! They're like the premium ice cream makers of the cow world.</p>
             </div>
 
-            <div class="card">
-                <span class="cow-emoji">🏆</span>
-                <h2>Popular Cow Breeds</h2>
-                <div class="breeds">
-                    <div class="breed">
-                        <div class="breed-name">Holstein</div>
-                        <div>🖤🤍 Black & White<br>Best milk producers!</div>
-                    </div>
-                    <div class="breed">
-                        <div class="breed-name">Jersey</div>
-                        <div>🤎 Brown<br>Rich, creamy milk</div>
-                    </div>
-                    <div class="breed">
-                        <div class="breed-name">Angus</div>
-                        <div>⚫ Black<br>Premium beef cattle</div>
-                    </div>
-                    <div class="breed">
-                        <div class="breed-name">Hereford</div>
-                        <div>🔴🤍 Red & White<br>Hardy & docile</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <span class="cow-emoji">🌍</span>
-                <h2>Cows Around the World</h2>
-                <ul>
-                    <li>🇮🇳 India has the most cattle (300+ million!)</li>
-                    <li>🇺🇸 USA produces the most milk</li>
-                    <li>🇧🇷 Brazil has the largest commercial cattle herd</li>
-                    <li>🇳🇿 New Zealand: 5 million people, 10 million cows!</li>
-                    <li>🇨🇭 Switzerland: Famous for Alpine cows with bells</li>
-                    <li>🏴󐁧󐁢󐁳󐁣󐁴󐁿 Scotland: Home to fluffy Highland cattle</li>
-                </ul>
+            <div class="cow-card">
+                <div class="cow-emoji">🥛</div>
+                <h3>Milk Facts</h3>
+                <p>A single cow can produce enough milk in her lifetime to fill about 200,000 glasses! That's enough for a very long cereal breakfast.</p>
             </div>
         </div>
 
         <div class="fun-facts">
-            <h2>🎉 Super Fun Cow Trivia!</h2>
+            <h2>🌟 Amazing Cow Facts!</h2>
             <ul>
-                <li>🐄 A group of cows is called a "herd" or "mob"</li>
-                <li>👶 Baby cows are called calves</li>
-                <li>👨‍🌾 Male cows are bulls, females are heifers or cows</li>
-                <li>🎵 Cows moo in regional accents!</li>
-                <li>💝 They form close friendships and mourn their friends</li>
-                <li>🧭 Cows naturally align north-south when resting</li>
-                <li>🎨 Each cow has a unique nose print, like human fingerprints!</li>
-                <li>🏔️ Some cows live at 16,000 feet altitude in Tibet!</li>
+                <li>🧠 Cows have best friends and get stressed when separated!</li>
+                <li>👀 Cows have panoramic vision - they can see 360 degrees!</li>
+                <li>🏃‍♀️ Cows can run up to 25 mph when they need to!</li>
+                <li>💤 Cows only sleep 4 hours per day and mostly standing up!</li>
+                <li>🎵 Cows produce more milk when listening to music!</li>
+                <li>📏 A cow's tongue is 18-20 inches long!</li>
+                <li>🏠 Cows have excellent memories and can remember faces for years!</li>
             </ul>
         </div>
 
-        <footer>
-            <h3>🐄 Thanks for visiting Cow Central! 🐄</h3>
-            <p>Remember: Happy cows make the best milk! Keep on mooing! 🥛</p>
-            <div style="margin-top: 15px; font-size: 2em;">
-                🐄 🐮 🥛 🌱 🐄 🐮 🥛 🌱
-            </div>
-        </footer>
+        <div class="cow-sounds">
+            <h2>🔊 Hear the Moo!</h2>
+            <p>Click to hear what our bovine friends have to say!</p>
+            <button onclick="playMoo()">MOO! 🐄</button>
+            <button onclick="playChew()">Chewing Sounds 🌾</button>
+            <button onclick="playBell()">Cow Bell 🔔</button>
+        </div>
     </div>
+
+    <footer>
+        <p>Made with 🐄 love | No cows were harmed in the making of this website!</p>
+    </footer>
 
     <script>
         function playMoo() {
-            const mooSound = document.getElementById('mooSound');
-            mooSound.classList.add('show');
-            
-            // Add some random moo variations
-            const moos = [
-                "MOOOOOOO! 🐄",
-                "Moo moo! 🐮",
-                "MOOO! 🥛",
-                "Moooooo! 🌱",
-                "*happy cow sounds* 🐄💕"
-            ];
-            
-            mooSound.textContent = moos[Math.floor(Math.random() * moos.length)];
-            
-            setTimeout(() => {
-                mooSound.classList.remove('show');
-            }, 2000);
-            
-            // Add some fun effects
-            document.body.style.background = `linear-gradient(135deg, 
-                hsl(${Math.random() * 60 + 100}, 70%, 85%) 0%, 
-                hsl(${Math.random() * 60 + 100}, 70%, 85%) 100%)`;
+            speak("Moooooo!");
+            createFloatingCow();
         }
 
-        // Add some interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    this.style.background = `hsl(${Math.random() * 360}, 70%, 95%)`;
-                    setTimeout(() => {
-                        this.style.background = 'white';
-                    }, 1000);
-                });
-            });
+        function playChew() {
+            speak("Chomp chomp chomp, munch munch");
+            createFloatingCow();
+        }
+
+        function playBell() {
+            speak("Ding dong, moo moo");
+            createFloatingCow();
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.8;
+                utterance.pitch = 0.8;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        function createFloatingCow() {
+            const cow = document.createElement('div');
+            cow.className = 'floating-cow';
+            cow.innerHTML = '🐄';
+            cow.style.left = Math.random() * window.innerWidth + 'px';
+            cow.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(cow);
+
+            setTimeout(() => {
+                cow.remove();
+            }, 3000);
+        }
+
+        // Auto-create floating cows occasionally
+        setInterval(createFloatingCow, 8000);
+
+        // Welcome message
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                speak("Welcome to Cow Central! Moooooo!");
+            }, 1000);
         });
     </script>
 </body>
